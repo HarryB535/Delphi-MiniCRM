@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2022/10/17 10:29:54.000.668,=C:\Users\HarrE\Desktop\Delphi Projects\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/10/17 10:30:13.000.618,C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM.dproj=C:\Users\HarrE\Desktop\Delphi Projects\Projects\Project1.dproj</Transaction>
+    <Transaction>2022/10/17 10:30:21.000.085,C:\Users\HarrE\Desktop\Delphi Projects\Projects\Search.pas=C:\Users\HarrE\Desktop\Delphi Projects\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/10/17 10:30:21.000.085,C:\Users\HarrE\Desktop\Delphi Projects\Projects\Search.dfm=C:\Users\HarrE\Desktop\Delphi Projects\Projects\Unit1.dfm</Transaction>
+    <Transaction>2022/10/17 10:30:31.000.010,=C:\Users\HarrE\Desktop\Delphi Projects\Projects\Unit3.pas</Transaction>
+    <Transaction>2022/10/17 10:30:40.000.647,=C:\Users\HarrE\Desktop\Delphi Projects\Projects\Unit4.pas</Transaction>
+    <Transaction>2022/10/17 10:30:46.000.610,C:\Users\HarrE\Desktop\Delphi Projects\Projects\Account.dfm=C:\Users\HarrE\Desktop\Delphi Projects\Projects\Unit3.dfm</Transaction>
+    <Transaction>2022/10/17 10:30:46.000.610,C:\Users\HarrE\Desktop\Delphi Projects\Projects\Account.pas=C:\Users\HarrE\Desktop\Delphi Projects\Projects\Unit3.pas</Transaction>
+    <Transaction>2022/10/17 10:30:50.000.897,C:\Users\HarrE\Desktop\Delphi Projects\Projects\Contact.dfm=C:\Users\HarrE\Desktop\Delphi Projects\Projects\Unit4.dfm</Transaction>
+    <Transaction>2022/10/17 10:30:50.000.897,C:\Users\HarrE\Desktop\Delphi Projects\Projects\Contact.pas=C:\Users\HarrE\Desktop\Delphi Projects\Projects\Unit4.pas</Transaction>
+    <Transaction>2022/10/17 10:30:59.000.490,C:\Users\HarrE\Desktop\Delphi Projects\Projects\Login.dfm=C:\Users\HarrE\Desktop\Delphi Projects\Projects\Search.dfm</Transaction>
+    <Transaction>2022/10/17 10:30:59.000.490,C:\Users\HarrE\Desktop\Delphi Projects\Projects\Login.pas=C:\Users\HarrE\Desktop\Delphi Projects\Projects\Search.pas</Transaction>
+    <Transaction>2022/10/17 10:31:17.000.681,=C:\Users\HarrE\Desktop\Delphi Projects\Projects\Unit5.pas</Transaction>
+    <Transaction>2022/10/17 10:31:23.000.987,C:\Users\HarrE\Desktop\Delphi Projects\Projects\Search.dfm=C:\Users\HarrE\Desktop\Delphi Projects\Projects\Unit5.dfm</Transaction>
+    <Transaction>2022/10/17 10:31:23.000.987,C:\Users\HarrE\Desktop\Delphi Projects\Projects\Search.pas=C:\Users\HarrE\Desktop\Delphi Projects\Projects\Unit5.pas</Transaction>
+    <Transaction>2022/10/17 10:32:56.000.702,C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Search.pas=C:\Users\HarrE\Desktop\Delphi Projects\Projects\Search.pas</Transaction>
+    <Transaction>2022/10/17 10:32:56.000.702,C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Search.dfm=C:\Users\HarrE\Desktop\Delphi Projects\Projects\Search.dfm</Transaction>
+    <Transaction>2022/10/17 10:32:59.000.134,C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Account.pas=C:\Users\HarrE\Desktop\Delphi Projects\Projects\Account.pas</Transaction>
+    <Transaction>2022/10/17 10:32:59.000.134,C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Account.dfm=C:\Users\HarrE\Desktop\Delphi Projects\Projects\Account.dfm</Transaction>
+    <Transaction>2022/10/17 10:33:00.000.501,C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Login.pas=C:\Users\HarrE\Desktop\Delphi Projects\Projects\Login.pas</Transaction>
+    <Transaction>2022/10/17 10:33:00.000.501,C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Login.dfm=C:\Users\HarrE\Desktop\Delphi Projects\Projects\Login.dfm</Transaction>
+    <Transaction>2022/10/17 10:33:02.000.787,C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Contact.pas=C:\Users\HarrE\Desktop\Delphi Projects\Projects\Contact.pas</Transaction>
+    <Transaction>2022/10/17 10:33:02.000.787,C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Contact.dfm=C:\Users\HarrE\Desktop\Delphi Projects\Projects\Contact.dfm</Transaction>
+    <Transaction>2022/10/17 10:33:05.000.599,C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\MiniCRM.dproj=C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM.dproj</Transaction>
+    <Transaction>2022/10/17 10:33:57.000.823,C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\MainForm.pas=C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Login.pas</Transaction>
+    <Transaction>2022/10/17 10:33:57.000.823,C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\MainForm.dfm=C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Login.dfm</Transaction>
+    <Transaction>2022/10/17 10:34:12.000.550,=C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Unit1.pas</Transaction>
+    <Transaction>2022/10/17 10:34:17.000.167,C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Login.dfm=C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Unit1.dfm</Transaction>
+    <Transaction>2022/10/17 10:34:17.000.167,C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Login.pas=C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Unit1.pas</Transaction>
+    <Transaction>2022/10/17 12:06:44.000.763,=C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Unit1.pas</Transaction>
+    <Transaction>2022/10/17 12:11:23.000.127,C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\DataModule.dfm=C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Unit1.dfm</Transaction>
+    <Transaction>2022/10/17 12:11:23.000.127,C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\DataModule.pas=C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Unit1.pas</Transaction>
+    <Transaction>2022/10/17 13:30:07.000.702,=C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Unit2.pas</Transaction>
+    <Transaction>2022/10/17 13:32:01.000.010,=C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\PassWord.pas</Transaction>
+    <Transaction>2022/10/20 12:42:04.000.208,=C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Unit1.pas</Transaction>
+    <Transaction>2022/10/20 12:42:42.000.697,C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Confirm.pas=C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Unit1.pas</Transaction>
+    <Transaction>2022/10/20 12:42:42.000.697,C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Confirm.dfm=C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Unit1.dfm</Transaction>
+    <Transaction>2022/10/20 15:33:45.000.404,C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Confirm.pas=</Transaction>
+    <Transaction>2022/10/21 08:46:09.000.680,=C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Unit1.pas</Transaction>
+    <Transaction>2022/10/21 08:46:21.000.749,C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Unit1.pas=C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\User.pas</Transaction>
+    <Transaction>2022/10/21 08:46:21.000.749,C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\Unit1.dfm=C:\Users\HarrE\Desktop\Delphi Projects\Projects\MiniCRM\User.dfm</Transaction>
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="Account.pas"/>
+    <File Path="Account.dfm"/>
+    <File Path="Contact.pas"/>
+    <File Path="Contact.dfm"/>
+    <File Path="DataModule.pas"/>
+    <File Path="DataModule.dfm"/>
+    <File Path="Login.pas"/>
+    <File Path="Login.dfm"/>
+    <File Path="MainForm.pas"/>
+    <File Path="MainForm.dfm"/>
+    <File Path="Search.pas"/>
+    <File Path="Search.dfm"/>
+    <File Path="User.pas"/>
+    <File Path="User.dfm"/>
+  </ProjectSortOrder>
+	<BT_BuildType>Debug</BT_BuildType>
+</BorlandProject>
