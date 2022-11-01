@@ -283,10 +283,8 @@ begin
     fldUserLoggedIn.Enabled := True;
     btnUserFind.Enabled := True;
     btnUserCreate.Enabled := True;
-    btnEditUser.Enabled := True;
     btnEditUserSave.Enabled := False;
     btnEditUserCancel.Enabled := False;
-    btnUserDelete.Enabled := True;
     { ReadOnly }
     fldUserFind.ReadOnly := False;
     fldUserName.ReadOnly := True;

@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{E39CAC0B-8015-4975-803C-445D26A9AC5B}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="MiniCRM.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\MiniCRM_ADO_edition\MiniCRM_ADO_edition.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="MiniCRM">
+        <MSBuild Projects="MiniCRM.dproj"/>
+    </Target>
+    <Target Name="MiniCRM:Clean">
+        <MSBuild Projects="MiniCRM.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MiniCRM:Make">
+        <MSBuild Projects="MiniCRM.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="MiniCRM_ADO_edition">
+        <MSBuild Projects="..\MiniCRM_ADO_edition\MiniCRM_ADO_edition.dproj"/>
+    </Target>
+    <Target Name="MiniCRM_ADO_edition:Clean">
+        <MSBuild Projects="..\MiniCRM_ADO_edition\MiniCRM_ADO_edition.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MiniCRM_ADO_edition:Make">
+        <MSBuild Projects="..\MiniCRM_ADO_edition\MiniCRM_ADO_edition.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="MiniCRM;MiniCRM_ADO_edition"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="MiniCRM:Clean;MiniCRM_ADO_edition:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="MiniCRM:Make;MiniCRM_ADO_edition:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

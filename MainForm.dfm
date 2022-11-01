@@ -40,7 +40,7 @@ object frmMain: TfrmMain
       OnClick = frmLoginbtnLoginGuestClick
     end
   end
-  object ButtonGroup1: TButtonGroup
+  object NavBar: TButtonGroup
     Left = 0
     Top = 0
     Width = 930
@@ -60,20 +60,20 @@ object frmMain: TfrmMain
     Font.Style = [fsBold]
     Items = <
       item
-        Caption = 'Account'
-        OnClick = ButtonGroup1Items0Click
-      end
-      item
-        Caption = 'Contact'
-        OnClick = ButtonGroup1Items1Click
-      end
-      item
-        Caption = 'User'
-        OnClick = ButtonGroup1Items2Click
-      end
-      item
         Caption = 'Search'
-        OnClick = ButtonGroup1Items3Click
+        OnClick = NavBarItems3Click
+      end
+      item
+        Caption = 'Accounts'
+        OnClick = NavBarItems0Click
+      end
+      item
+        Caption = 'Contacts'
+        OnClick = NavBarItems1Click
+      end
+      item
+        Caption = 'Users'
+        OnClick = NavBarItems2Click
       end>
     ParentDoubleBuffered = False
     TabOrder = 2

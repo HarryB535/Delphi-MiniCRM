@@ -2,7 +2,7 @@ object frmLogin: TfrmLogin
   Left = 0
   Top = 0
   Width = 243
-  Height = 247
+  Height = 165
   TabOrder = 0
   object lblLoginText: TLabel
     Left = 80

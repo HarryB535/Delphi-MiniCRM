@@ -16,6 +16,7 @@ type
     FDConnection1: TFDConnection;
     OpenDialog: TOpenDialog;
     procedure DataModuleCreate(Sender: TObject);
+    function isDBConnected():Boolean;
     function User_Login_Check(var uiUserName: String;
       var uiPassword: String): Boolean;
     function Credentials_Check(var uiUserName: String;
@@ -29,6 +30,7 @@ type
     function Find_Account_ID(id: Integer): TArray<String>;
     function Find_Contact_ID(id: Integer): TArray<String>;
     function Find_User_ID(id: Integer): TArray<String>;
+    function Find_User_Username(thisUsername: String): TArray<String>;
     function Update_DB_Account_Details(Aid: String; Aname: String;
       Aphone: String; Aaddress: String; Apcontact: String;
       Acdate: String): Boolean;
@@ -44,7 +46,6 @@ type
     function Delete_Account(id: Integer): Boolean;
     function Delete_User(id: Integer): Boolean;
   private
-    path: String;
     { Private declarations }
   public
     { Public declarations }
@@ -53,6 +54,8 @@ type
 var
   DataModule1: TDataModule1;
   userID: Integer;
+  userFullName: String;
+  userName: String;
 
 implementation
 
@@ -63,7 +66,7 @@ procedure TDataModule1.DataModuleCreate(Sender: TObject);
 { Creates DB connection on Unit creation
   path is relative to app location }
 begin
-  ShowMessage('Please select Database file.');
+  ShowMessage('Please select SQLite Database file.');
   openDialog := TOpenDialog.Create(self);
 
   {Set up the starting directory to be the current one}
@@ -90,15 +93,33 @@ begin
   end
   else
   begin
-    ShowMessage('No Database Selected.');
-    FDConnection1.Connected := False;
-    FDConnection1.Close;
+    FDConnection1.Free;
+    raise Exception.Create('No database selected');
   end;
 
   {Free up the dialog}
   openDialog.Free;
+  {Initial value for currently logged in user id, loggin process has not been completed yet.}
   userID := -1;
 end;
+
+
+function TDataModule1.isDBConnected():Boolean;
+begin
+  try
+    if FDConnection1.Ping then
+    begin
+      result := True;
+    end
+  except
+    on E:Exception do
+    begin
+      ShowMessage('Database connection failure: ' + E.Message);
+      Result := False;
+    end;
+  end;
+end;
+
 
 function TDataModule1.User_Login_Check(var uiUserName: String;
   var uiPassword: String): Boolean;
@@ -128,12 +149,13 @@ begin
     query.CloseStreams;
     query.Connection := FDConnection1;
     query.SQL.Text :=
-      'SELECT ID, USERNAME, PASSWORD FROM USERS WHERE USERNAME =''' + uiUserName
+      'SELECT ID, USERNAME, FIRST_NAME, LAST_NAME, PASSWORD FROM USERS WHERE USERNAME =''' + uiUserName
       + ''' AND PASSWORD =''' + uiPassword + '''';
     query.Open();
     if Length(query.FieldByName('USERNAME').AsString) > 0 then
     begin
       userID := query.FieldByName('ID').AsInteger;
+      userFullName := query.FieldByName('FIRST_NAME').AsString + ' ' + query.FieldByName('LAST_NAME').AsString;
       query.Close;
       query.DisposeOf;
       Result := True;
@@ -466,6 +488,42 @@ begin
   end;
 end;
 
+
+function TDataModule1.Find_User_Username(thisUsername: String): TArray<String>;
+{ Find given user in db USERS table matching by username }
+var
+  query: TFDQuery;
+begin
+
+  query := TFDQuery.Create(nil);
+
+  try
+    {Define the SQL Query}
+    begin
+      query.Connection := FDConnection1;
+      query.SQL.Text := 'SELECT * FROM USERS WHERE USERNAME = ''' + thisUsername + '''';
+      query.Open();
+      userName := query.FieldByName('USERNAME').AsString;
+      SetLength(Result, 11);
+      Result[0] := query.FieldByName('ID').AsString;
+      Result[1] := query.FieldByName('USERNAME').AsString;
+      Result[2] := query.FieldByName('FIRST_NAME').AsString;
+      Result[3] := query.FieldByName('LAST_NAME').AsString;
+      Result[4] := query.FieldByName('PASSWORD').AsString;
+      Result[5] := query.FieldByName('CREATED_DATE').AsString;
+      Result[6] := query.FieldByName('PASSWORD_CHANGED').AsString;
+      Result[7] := query.FieldByName('LAST_LOGIN').AsString;
+      Result[8] := query.FieldByName('ACTIVE').AsString;
+      Result[9] := query.FieldByName('LOGGED_IN').AsString;
+      Result[10] := query.FieldByName('IS_ADMIN').AsString;
+    end;
+  except
+    on E: Exception do
+      ShowMessage(E.Message);
+  end;
+end;
+
+
 function TDataModule1.Update_DB_Account_Details(Aid: String; Aname: String;
   Aphone: String; Aaddress: String; Apcontact: String; Acdate: String): Boolean;
 { Update given account in db ACCOUNTS table matching by id }
@@ -487,8 +545,7 @@ begin
           'PRIMARY_CONTACT = :primary_contact, ' + 'MODIFIED_DATE = datetime(' +
           '''now''' + '), ' + 'MODIFIED_USER = :modified_user ' + 'WHERE ID = '
           + Aid, [Trim(Aname), Trim(Aphone), Trim(Aaddress), Trim(Apcontact),
-          Trim(IntToStr(userID))
-          // this needs to be replaced with users full name
+          Trim(userFullName)
           ]);
         query.DisposeOf;
         Result := True;
@@ -496,10 +553,9 @@ begin
       else
       { Create Account. Associated with Create button }
       begin
-        query.ExecSQL('INSERT INTO ACCOUNTS VALUES' +
+        query.ExecSQL('INSERT INTO ACCOUNTS (ID, USERNAME, FIRST_NAME, LAST_NAME, PASSWORD, CREATED_DATE, PASSWORD_CHANGED, LAST_LOGIN, ACTIVE, LOGGED_IN, IS_ADMIN) VALUES' +
           '(:ID,:NAME,:CREATED_DATE,:CREATED_BY,:MODIFIED_DATE,:MODIFIED_USER,:PHONE_NUMBER,:ADDRESS,:PRIMARY_CONTACT)',
-          [Trim(Aid), Trim(Aname), Acdate, Trim(IntToStr(userID)),
-          // this needs to be replaced with users full name
+          [Trim(Aid), Trim(Aname), Acdate, Trim(userFullName),
           '', '', Trim(Aphone), Trim(Aaddress), Trim(Apcontact)]);
         query.DisposeOf;
         Result := True;
@@ -536,7 +592,7 @@ begin
         'EMAIL = :EMAIL, ' + 'ACCOUNT = ACCOUNT, ' + 'MODIFIED_DATE = datetime('
         + '''now''' + '), ' + 'MODIFIED_USER = :MODIFIED_USER ' + 'WHERE ID = '
         + Cid, [Trim(Cfullname), Trim(Cnameprefix), Trim(Cfirstname),
-        Trim(Clastname), Trim(Cphone), Trim(Cemail), Trim(IntToStr(userID))]);
+        Trim(Clastname), Trim(Cphone), Trim(Cemail), Trim(userFullName)]);
       query.DisposeOf;
       Result := True;
     end;
@@ -578,7 +634,7 @@ begin
       end;
       query.CloseStreams;
       query.Connection := FDConnection1;
-      if Length(Ucdate) > 1 then
+      if Length(Uldate) > 1 then
       begin
         query.ExecSQL('UPDATE USERS SET ' + 'USERNAME = :USERNAME, ' +
           'FIRST_NAME = :FIRST_NAME, ' + 'LAST_NAME = :LAST_NAME, ' +
@@ -595,14 +651,14 @@ begin
       else
       { Create User. Associated with Create button }
       begin
-        query.ExecSQL('INSERT INTO USERS VALUES ' +
-          '(:ID,:USERNAME,:FIRST_NAME,:LAST_NAME,:PASSWORD,:CREATED_DATE,' +
-          ':PASSWORD_CHANGED,:LAST_LOGIN,:ACTIVE,:LOGGED_IN,:IS_ADMIN)',
-          [Trim(Uid), Trim(Uusername), Trim(Ufirstname), Trim(Ulastname),
-          Trim(Upassword), Trim(Ucdate), Trim(Update), Trim(Uldate),
-          Trim(Uactive), 'False', Trim(Uadmin)]);
-        query.DisposeOf;
-        Result := True;
+      query.ExecSQL('INSERT INTO USERS (ID, USERNAME, FIRST_NAME, LAST_NAME, PASSWORD, CREATED_DATE, PASSWORD_CHANGED, LAST_LOGIN, ACTIVE, LOGGED_IN, IS_ADMIN) VALUES ' +
+        '(:ID,:USERNAME,:FIRST_NAME,:LAST_NAME,:PASSWORD,:CREATED_DATE,' +
+        ':PASSWORD_CHANGED,:LAST_LOGIN,:ACTIVE,:LOGGED_IN,:IS_ADMIN)',
+        [Trim(Uid), Trim(Uusername), Trim(Ufirstname), Trim(Ulastname),
+        Trim(Upassword), Trim(Ucdate), Trim(Update), Trim(Uldate),
+        Trim(Uactive), 'False', Trim(Uadmin)]);
+      query.DisposeOf;
+      Result := True;
       end;
     end;
   except

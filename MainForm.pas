@@ -17,25 +17,26 @@ type
     frmUser: TfrmUser;
     frmSearch: TfrmSearch;
     lblLoggedInAs: TLabel;
-    ButtonGroup1: TButtonGroup;
+    NavBar: TButtonGroup;
     procedure frmLoginbtnLoginClick(Sender: TObject);
     procedure frmLoginbtnLoginGuestClick(Sender: TObject);
     procedure frmLoginbtnLoginKeyPress(Sender: TObject; var Key: Char);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure ButtonGroup1Items0Click(Sender: TObject);
-    procedure ButtonGroup1Items1Click(Sender: TObject);
-    procedure ButtonGroup1Items2Click(Sender: TObject);
-    procedure ButtonGroup1Items3Click(Sender: TObject);
+    procedure NavBarItems0Click(Sender: TObject);
+    procedure NavBarItems1Click(Sender: TObject);
+    procedure NavBarItems2Click(Sender: TObject);
+    procedure NavBarItems3Click(Sender: TObject);
     procedure frmSearchDBGrid1DblClick(Sender: TObject);
     procedure GoToAccountDetails(Sender: TObject);
     procedure GoToUserDetails(Sender: TObject);
     procedure GoToContactDetails(Sender: TObject);
   private
-  var
-    guest: Boolean;
-    username: String;
+    var
+      guest: Boolean;
     { Private declarations }
   public
+    var
+      username: String;
     { Public declarations }
   end;
 
@@ -55,7 +56,7 @@ begin
     username := frmLogin.fldUsername.Text;
     frmLogin.Hide;
     frmSearch.Show;
-    ButtonGroup1.Show;
+    NavBar.Show;
     lblLoggedInAs.Caption := username;
   end
   else
@@ -74,7 +75,7 @@ begin
     username := 'Guest';
     frmLogin.Hide;
     frmSearch.Show;
-    ButtonGroup1.Show;
+    NavBar.Show;
     lblLoggedInAs.Caption := username;
   end
   else
@@ -97,10 +98,13 @@ end;
 procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);
 { Calls function to change user logged_in db status }
 begin
-  DataModule1.Update_DB_Logged_in_Status_False(UserID);
+  if DataModule1.isDBConnected() then
+  begin
+    DataModule1.Update_DB_Logged_in_Status_False(UserID);
+  end
 end;
 
-procedure TfrmMain.ButtonGroup1Items0Click(Sender: TObject);
+procedure TfrmMain.NavBarItems0Click(Sender: TObject);
 { Shows Account Details Frame }
 begin
   frmSearch.Hide;
@@ -109,7 +113,7 @@ begin
   frmAccount.Show;
 end;
 
-procedure TfrmMain.ButtonGroup1Items1Click(Sender: TObject);
+procedure TfrmMain.NavBarItems1Click(Sender: TObject);
 { Shows Contact Details Frame }
 begin
   frmAccount.Hide;
@@ -118,7 +122,7 @@ begin
   frmContact.Show;
 end;
 
-procedure TfrmMain.ButtonGroup1Items2Click(Sender: TObject);
+procedure TfrmMain.NavBarItems2Click(Sender: TObject);
 { Shows User Details Frame }
 begin
   frmAccount.Hide;
@@ -127,7 +131,7 @@ begin
   frmUser.Show;
 end;
 
-procedure TfrmMain.ButtonGroup1Items3Click(Sender: TObject);
+procedure TfrmMain.NavBarItems3Click(Sender: TObject);
 { Shows Search Frame }
 begin
   frmAccount.Hide;
@@ -160,7 +164,7 @@ begin
   and assigns it to the selectedID variable}
   frmSearch.DBGrid1DblClick(Sender);
   {Show / Hide correct frames}
-  ButtonGroup1Items0Click(Sender);
+  NavBarItems0Click(Sender);
   {Uses selected ID from the search grid and triggers the find procedure}
   frmAccount.fldAccountFind.Text := IntToStr(frmSearch.selectedID);
   frmAccount.btnAccountFindClick(Sender);
@@ -175,7 +179,7 @@ begin
   and assigns it to the selectedID variable}
   frmSearch.DBGrid1DblClick(Sender);
   {Show / Hide correct frames}
-  ButtonGroup1Items2Click(Sender);
+  NavBarItems2Click(Sender);
   {Uses selected ID from the search grid and triggers the find procedure}
   frmUser.fldUserFind.Text := IntToStr(frmSearch.selectedID);
   frmUser.btnUserFindClick(Sender);
@@ -190,7 +194,7 @@ begin
   and assigns it to the selectedID variable}
   frmSearch.DBGrid1DblClick(Sender);
   {Show / Hide correct frames}
-  ButtonGroup1Items1Click(Sender);
+  NavBarItems1Click(Sender);
   {Uses selected ID from the search grid and triggers the find procedure}
   frmContact.fldContactFind.Text := IntToStr(frmSearch.selectedID);
   frmContact.btnContactFindClick(Sender);

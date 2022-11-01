@@ -73,16 +73,22 @@ begin
       id := StrToInt(fldAccountFind.Text);
       { DB Query }
       accountData := DataModule1.Find_Account_ID(id);
-      { AutoFill fields using DB Query results }
-      fldAccountID.Text := accountData[0];
-      fldAccountName.Text := accountData[1];
-      fldAccountCreatedDate.Text := accountData[2];
-      fldAccountCreatedBy.Text := accountData[3];
-      fldAccountModifiedDate.Text := accountData[4];
-      fldAccountModifiedBy.Text := accountData[5];
-      fldAccountPhone.Text := accountData[6];
-      fldAccountAddress.Text := accountData[7];
-      fldAccountPContact.Text := accountData[8];
+      if Length(accountData[2]) > 0 then
+      begin
+        { AutoFill fields using DB Query results }
+        fldAccountID.Text := accountData[0];
+        fldAccountName.Text := accountData[1];
+        fldAccountCreatedDate.Text := accountData[2];
+        fldAccountCreatedBy.Text := accountData[3];
+        fldAccountModifiedDate.Text := accountData[4];
+        fldAccountModifiedBy.Text := accountData[5];
+        fldAccountPhone.Text := accountData[6];
+        fldAccountAddress.Text := accountData[7];
+        fldAccountPContact.Text := accountData[8];
+      end
+      else
+      ShowMessage('No record forund  for ID: '+fldAccountFind.Text);
+
       if DataModule1.Is_Admin_User(UserID) then
       { if user has admin status, re-enable edit and delete buttons }
       begin
@@ -267,8 +273,8 @@ begin
         (MessageDlg
         ('This action cannot be undone. Are you sure you wish to proceed?',
         mtConfirmation, [mbYes, mbNo], 0, mbYes) = mrYes) then
-      { if id is in acceptable ranges and the user has admin status and the user accepts the confirmation dialog,
-        process the delete DB query }
+      { if id is in acceptable ranges and the user has admin status and the
+      user accepts the confirmation dialog, then process the delete DB query }
       begin
         DataModule1.Delete_Account(id);
         btnEditAccountCancelClick(Sender);
